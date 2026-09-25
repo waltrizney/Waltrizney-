@@ -20,10 +20,10 @@
         .top-area{min-height:88px!important;padding:14px!important;text-align:center}
         .top-area .donate,.top-area .context-link{top:16px!important;z-index:2;border:1px solid var(--gold);border-radius:999px;padding:5px 9px;color:var(--bright-gold);background:#160c1a;font:inherit;font-size:.68rem;text-decoration:none}
         .top-area .donate{left:10px!important}.top-area .context-link{left:50%!important;transform:translateX(-50%)!important}
-        .top-area .rizney-logo{position:absolute;top:8px;right:14px;width:92px;height:92px;object-fit:contain}
+        .top-area .rizney-logo{position:absolute;top:10px;right:14px;width:112px;height:112px;object-fit:contain}
         .top-area .donate:hover,.top-area .context-link:hover{background:#55208a}
-        .rizney-footer{margin:22px auto 0;padding:20px 0 34px;text-align:center;border-top:1px solid #3b1d50}
-        .rizney-footer img{display:block;width:110px;height:auto;max-height:150px;object-fit:contain;margin:0 auto}
+        .rizney-footer{margin:22px auto 0;padding:5px 0 34px;text-align:center;border-top:1px solid #3b1d50}
+        .rizney-footer img{display:block;width:200px;height:auto;max-height:250px;object-fit:contain;margin:0 auto}
         @media(max-width:500px){.top-area{min-height:78px!important;padding:12px 8px 14px!important}.top-area .donate,.top-area .context-link{top:14px!important}.top-area .donate{left:8px!important}.top-area .rizney-logo{width:66px;height:66px;top:4px;right:8px}.rizney-footer img{width:94px}}
       `; document.head.appendChild(style);
     }
