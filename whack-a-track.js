@@ -20,7 +20,7 @@
         .top-area{min-height:88px!important;padding:14px!important;text-align:center}
         .top-area .donate,.top-area .context-link{top:16px!important;z-index:2;border:1px solid var(--gold);border-radius:999px;padding:5px 9px;color:var(--bright-gold);background:#160c1a;font:inherit;font-size:.68rem;text-decoration:none}
         .top-area .donate{left:10px!important}.top-area .context-link{left:50%!important;transform:translateX(-50%)!important}
-        .top-area .rizney-logo{position:absolute;top:6px;right:10px;width:76px;height:76px;object-fit:contain}
+        .top-area .rizney-logo{position:absolute;top:8px;right:14px;width:92px;height:92px;object-fit:contain}
         .top-area .donate:hover,.top-area .context-link:hover{background:#55208a}
         .rizney-footer{margin:22px auto 0;padding:20px 0 34px;text-align:center;border-top:1px solid #3b1d50}
         .rizney-footer img{display:block;width:110px;height:auto;max-height:150px;object-fit:contain;margin:0 auto}
