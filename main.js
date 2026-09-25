@@ -3,9 +3,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const controls = () => $(".controls");
 
-  
- const animals = ["aardvark","alligator","anglefish","ant","anteater","armadillo","baboon","badger","bald-eagle","bass","bat","bear","beaver","bee","blob-fish","blue-heron","boar","buffalo","butterfly","camel","capybara","chameleon","cheetah","chihuahua","chimpanzee","chupacabra","clam","cow","coyote","crab","cricket","crocodile","crow","deer","dolphin","donkey","dove","duck","eagle","elephant","falcon","flamingo","fox","frog","gazelle","giraffe","goat","goldfish","gorilla","hamster","hawk","hedgehog","hippo","horse","hyena","jellyfish","kangaroo","kiwi","koala","lion","lizard","llama","lynx","manatee","mole","moose","mouse","narwhal","octopus (2)","otter","owl","panda","panther","parrot","peacock","penguin","pig","platypus","polar-bear","porcupine","puma","rabbit","raccoon","ram","rat","raven","red-panda","rhino","rooster","salmon","scorpion","seagull","seahorse","seal","shark","sloth","snail","snake","spider","squid","squirrel","swan","t-rex","tapir","toucan","unicorn","vulture","walrus","warthog","weasel","whale","wolf","wombat","woodpecker","yak","zebra"];
-
+  const animals = ["aardvark","alligator","anglefish","ant","anteater","armadillo","baboon","badger","bald-eagle","bass","bat","bear","beaver","bee","blob-fish","blue-heron","boar","buffalo","bull-frog","butterfly","camel","capybara","cardinal","cat","catfish","caterpillar","centipede","chameleon","cheetah","chicken","chimpanzee","clownfish","cobra","cod","condor","coral","cougar","cow","crab","crane","crocodile","crow","deer","dolphin","donkey","dory","dragonfly","duck","eagle","eel","elephant","falcon","ferret","firefly","flamingo","fox","frog","gar","gazelle","gecko","giraffe","goat","goldfish","gorilla","grasshopper","hawk","hedgehog","heron","hippo","hornet","horse","hummingbird","hyena","ibis","iguana","impala","jaguar","jay","jellyfish","kangaroo","kingfisher","koala","lemur","leopard","lion","lizard","llama","lobster","lynx","macaw","manatee","mantis","marlin","mole","moose","narwhal","octopus","okapi","otter","owl","panda","panther","parrot","peacock","pelican","penguin","pigeon","piranha","platypus","porcupine","puffin","puma","quail","rabbit","raccoon","ram","rat","raven","reindeer","roadrunner","robin","sailfish","salmon","scorpion","seal","shark","sheep","shrew","skunk","sloth","snail","snake","sparrow","spider","squid","squirrel","starling","stingray","stoat","stork","swallow","swan","tapir","tarantula","tiger","toad","toucan","turkey","turtle","vulture","walrus","wasp","weasel","whale","wolf","wombat","woodpecker","yak","zebra"];
 
   const animal = i => animals[i % animals.length];
   const imageFor = i => `assets/animal-icons/${encodeURIComponent(animal(i))}.png`;
@@ -40,13 +38,13 @@
       style.id = "rizney-site-adjustments";
       style.textContent = `
         .top-area{min-height:88px!important;padding:14px!important;text-align:center}
-        .top-area .donate,.top-area .context-link{top:16px!important;z-index:2;border:1px solid var(--gold);border-radius:999px;padding:5px 9px;color:var(--bright-gold);background:#160c1a;font:inherit[...]
+        .top-area .donate,.top-area .context-link{top:16px!important;z-index:2;border:1px solid var(--gold);border-radius:999px;padding:5px 9px;color:var(--bright-gold);background:#160c1a;font:inherit;position:absolute;left:10px!important;text-decoration:none}
         .top-area .donate{left:10px!important}.top-area .context-link{left:50%!important;transform:translateX(-50%)!important}
         .top-area .rizney-logo{position:absolute;top:10px;right:14px;width:112px;height:112px;object-fit:contain}
         .top-area .donate:hover,.top-area .context-link:hover{background:#55208a}
         .rizney-footer{margin:22px auto 0;padding:5px 0 34px;text-align:center;border-top:1px solid #3b1d50}
         .rizney-footer img{display:block;width:200px;height:auto;max-height:250px;object-fit:contain;margin:0 auto}
-        @media(max-width:500px){.top-area{min-height:78px!important;padding:12px 8px 14px!important}.top-area .donate,.top-area .context-link{top:14px!important}.top-area .donate{left:8px!important}.t[...]
+        @media(max-width:500px){.top-area{min-height:78px!important;padding:12px 8px 14px!important}.top-area .donate,.top-area .context-link{top:14px!important}.top-area .donate{left:8px!important}.top-area .context-link{left:50%!important}.top-area .rizney-logo{width:88px;height:88px;right:10px!important}}
       `;
       document.head.appendChild(style);
     }
@@ -73,9 +71,9 @@
     style.textContent = `
       #reading[hidden]{display:none!important}
       #song-list .song{grid-template-columns:38px minmax(0,1fr) 52px}
-      #song-list .song .play{grid-column:3;grid-row:1;align-self:stretch;justify-self:end;width:52px;height:52px;min-height:52px;padding:3px;display:grid;place-items:center;overflow:hidden;background:[...]
+      #song-list .song .play{grid-column:3;grid-row:1;align-self:stretch;justify-self:end;width:52px;height:52px;min-height:52px;padding:3px;display:grid;place-items:center;overflow:hidden;background:transparent;border-color:transparent}
       #song-list .song .play img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
-      #cards .card{background:#000}.card .symbol{height:96px;display:grid;place-items:center;font-size:0}.card .symbol img{width:96px;height:96px;object-fit:contain;display:block}.card .animal-name{di[...]
+      #cards .card{background:#000}.card .symbol{height:96px;display:grid;place-items:center;font-size:0}.card .symbol img{width:96px;height:96px;object-fit:contain;display:block}.card .animal-name{display:block;color:var(--bright-gold);font-size:.78rem;margin-top:6px}
       @media(max-width:500px){#song-list .song{grid-template-columns:30px minmax(0,1fr) 46px}#song-list .song .play{width:46px;height:46px;min-height:46px}}
     `;
     document.head.appendChild(style);

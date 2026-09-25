@@ -11,7 +11,7 @@
     const style = document.createElement("style");
     style.id = "whack-a-track-styles";
     style.textContent = `
-      #whack-a-track-game{position:fixed;top:var(--whack-toolbar-bottom,0px);left:50%;transform:translateX(-50%);z-index:99;display:block;width:min(calc(100vw - 16px),620px);max-height:calc(100vh - var(--whack-toolbar-bottom,0px) - 16px);overflow-y:auto;padding:16px;background:#160c1a;border:2px solid var(--gold);border-radius:12px}
+      #whack-a-track-game{position:fixed;top:var(--whack-toolbar-bottom,0px);left:50%;transform:translateX(-50%);z-index:99;display:block;width:min(calc(100vw - 16px),620px);max-height:calc(100vh - var(--whack-toolbar-bottom, 0px) - 16px);overflow:auto;background:rgba(5,3,5,.95);border:2px solid var(--gold);border-radius:18px;padding:12px 12px 10px;box-shadow:0 16px 32px rgba(0,0,0,.5)}
       #whack-a-track-game[hidden]{display:none!important}
       #whack-a-track-game h2{margin:0 0 6px;padding:0;border:0;font-size:1rem}
       #wat-status{margin:4px 0;font-size:.85rem}
@@ -19,9 +19,10 @@
       .wat-health-fill{height:100%;width:100%;background:linear-gradient(90deg,#e05252,#f5d76e);transition:width .15s ease}
       .wat-time-fill{height:100%;width:100%;background:linear-gradient(90deg,#7b4de8,#d98cff);transition:width .15s linear}
       .wat-timer{margin:4px 0 8px;color:var(--bright-purple);font-weight:bold}
-      .wat-board{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;width:100%;max-width:500px;margin:8px auto 0;padding:10px;border:2px solid var(--gold);border-radius:10px;background:#090509}
-      .wat-hole{min-height:clamp(58px,14vh,106px);padding:6px;font-size:clamp(1.8rem,6vw,2.8rem);line-height:1;border:2px solid var(--gold);border-radius:10px;background:#090509;color:#fff;cursor:pointer;transition:background .1s ease}
+      .wat-board{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;width:100%;max-width:500px;margin:8px auto 0;padding:10px;border:2px solid var(--gold);border-radius:16px;background:#100a13}
+      .wat-hole{min-height:clamp(58px,14vh,106px);padding:6px;font-size:clamp(1.8rem,6vw,2.8rem);line-height:1;border:2px solid var(--gold);border-radius:10px;background:#090509;color:#fff;cursor:pointer;user-select:none;transition:transform .08s ease, background .12s ease}
       .wat-hole:hover{background:#21102e}
+      .wat-hole:active{transform:scale(.96)}
       @media(max-width:500px){.wat-board{gap:6px;padding:7px;margin-top:6px}}
     `;
     document.head.appendChild(style);
