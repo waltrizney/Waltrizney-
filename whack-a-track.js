@@ -221,7 +221,7 @@
     if (!active || hole.dataset.active !== "true") return;
 
     hole.dataset.active = "false";
-    hole.textContent = "✨";
+    hole.textContent = "💥";
 
     whacks = Math.min(
       targetWhacks,
@@ -251,7 +251,7 @@
     if (!hole) return;
 
     hole.dataset.active = "true";
-    hole.textContent = "🐾";
+    hole.textContent = "🐭";
 
     clearTimeout(moleTimer);
 
@@ -370,7 +370,7 @@
     updateTimer();
 
     game.status.textContent =
-      "Whack 20 moles to whack the track!";
+      "Win to remove whack track from playlist";
 
     clearInterval(gameTimer);
 
