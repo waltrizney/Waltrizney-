@@ -3,7 +3,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const controls = () => $(".controls");
 
-  const animals = ["aardvark","alligator","anglefish","ant","anteater","armadillo","baboon","badger","bald-eagle","bass","bat","bear","beaver","bee","blob-fish","blue-heron","boar","buffalo","butterfly","camel","capybara","chameleon","cheetah","chihuahua","chimpanzee","chupacabra","clam","cow","coyote","crab","cricket","crocodile","crow","deer","dolphin","donkey","dove","duck","eagle","elephant","falcon","flamingo","fox","frog","gazelle","giraffe","goat","goldfish","gorilla","hamster","hawk","hedgehog","hippo","horse","hyena","jellyfish","kangaroo","kiwi","koala","lion","lizard","llama","lynx","manatee","mole","moose","mouse","narwhal","octopus (2)","otter","owl","panda","panther","parrot","peacock","penguin","pig","pirahna","platypus","polar-bear","porcupine","puma","rabbit","raccoon","ram","rat","raven","red-panda","rhino","rooster","salmon","scorpion","seagull","seahorse","seal","shark","sloth","snail","snake","spider","squid","squirrel","swan","t-rex","tapir","toucan","unicorn","vulture","walrus","warthog","weasel","whale","wolf","wombat","woodpecker","yak","zebra"];
+  const animals = ["aardvark","alligator","anglefish","ant","anteater","armadillo","baboon","badger","bald-eagle","bass","bat","bear","beaver","bee","blob-fish","blue-heron","boar","buffalo","butterfl[...]
 
   const animal = i => animals[i % animals.length];
   const imageFor = i => `assets/animal-icons/${encodeURIComponent(animal(i))}.png`;
@@ -38,13 +38,13 @@
       style.id = "rizney-site-adjustments";
       style.textContent = `
         .top-area{min-height:88px!important;padding:14px!important;text-align:center}
-        .top-area .donate,.top-area .context-link{top:16px!important;z-index:2;border:1px solid var(--gold);border-radius:999px;padding:5px 9px;color:var(--bright-gold);background:#160c1a;font:inherit;font-size:.68rem;text-decoration:none}
+        .top-area .donate,.top-area .context-link{top:16px!important;z-index:2;border:1px solid var(--gold);border-radius:999px;padding:5px 9px;color:var(--bright-gold);background:#160c1a;font:inherit[...]
         .top-area .donate{left:10px!important}.top-area .context-link{left:50%!important;transform:translateX(-50%)!important}
         .top-area .rizney-logo{position:absolute;top:10px;right:14px;width:112px;height:112px;object-fit:contain}
         .top-area .donate:hover,.top-area .context-link:hover{background:#55208a}
         .rizney-footer{margin:22px auto 0;padding:5px 0 34px;text-align:center;border-top:1px solid #3b1d50}
         .rizney-footer img{display:block;width:200px;height:auto;max-height:250px;object-fit:contain;margin:0 auto}
-        @media(max-width:500px){.top-area{min-height:78px!important;padding:12px 8px 14px!important}.top-area .donate,.top-area .context-link{top:14px!important}.top-area .donate{left:8px!important}.top-area .rizney-logo{width:66px;height:66px;top:4px;right:8px}.rizney-footer img{width:94px}}
+        @media(max-width:500px){.top-area{min-height:78px!important;padding:12px 8px 14px!important}.top-area .donate,.top-area .context-link{top:14px!important}.top-area .donate{left:8px!important}.t[...]
       `;
       document.head.appendChild(style);
     }
@@ -72,10 +72,10 @@
       .player-dock{z-index:101}.controls{position:sticky;top:var(--rizney-player-height,0px);z-index:100}
       #reading[hidden]{display:none!important}
       #song-list .song{grid-template-columns:38px minmax(0,1fr) 52px}
-      #song-list .song .play{grid-column:3;grid-row:1;align-self:stretch;justify-self:end;width:52px;height:52px;min-height:52px;padding:3px;display:grid;place-items:center;overflow:hidden;background:transparent;border:0}
+      #song-list .song .play{grid-column:3;grid-row:1;align-self:stretch;justify-self:end;width:52px;height:52px;min-height:52px;padding:3px;display:grid;place-items:center;overflow:hidden;background:[...]
       #song-list .song .play img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
-      #cards .card{background:#000}.card .symbol{height:96px;display:grid;place-items:center;font-size:0}.card .symbol img{width:96px;height:96px;object-fit:contain;display:block}.card .animal-name{display:block;text-transform:capitalize}
-      #whack-a-track-game{position:fixed;top:var(--whack-toolbar-bottom,0px);left:50%;transform:translateX(-50%);z-index:99;display:block;width:min(calc(100vw - 16px),620px);max-height:calc(100vh - var(--whack-toolbar-bottom,0px) - 8px);overflow:auto;padding:8px;background:#160c1a;border:2px solid var(--gold);border-radius:10px;box-sizing:border-box}
+      #cards .card{background:#000}.card .symbol{height:96px;display:grid;place-items:center;font-size:0}.card .symbol img{width:96px;height:96px;object-fit:contain;display:block}.card .animal-name{di[...]
+      #whack-a-track-game{position:fixed;top:var(--whack-toolbar-bottom,0px);left:50%;transform:translateX(-50%);z-index:99;display:block;width:min(calc(100vw - 16px),620px);max-height:calc(100vh - va[...]
       #whack-a-track-game[hidden]{display:none!important}
       #whack-a-track-game h2{margin:0 0 6px;padding:0;border:0;font-size:1rem}
       #wat-status{margin:4px 0;font-size:.85rem}
@@ -83,10 +83,10 @@
       .wat-health-fill{height:100%;width:100%;background:linear-gradient(90deg,#e05252,#f5d76e);transition:width .15s ease}
       .wat-time-fill{height:100%;width:100%;background:linear-gradient(90deg,#7b4de8,#d98cff);transition:width .15s linear}
       .wat-timer{margin:4px 0 8px;color:var(--bright-purple);font-weight:bold}
-      .wat-board{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;width:100%;max-width:500px;margin:8px auto 0;padding:10px;border:2px solid var(--gold);border-radius:10px;box-sizing:border-box}
-      .wat-hole{min-height:clamp(58px,14vh,106px);padding:6px;font-size:clamp(1.8rem,6vw,2.8rem);line-height:1;border:2px solid var(--gold);border-radius:10px;background:#090509;color:#fff;cursor:pointer}
+      .wat-board{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;width:100%;max-width:500px;margin:8px auto 0;padding:10px;border:2px solid var(--gold);b[...]
+      .wat-hole{min-height:clamp(58px,14vh,106px);padding:6px;font-size:clamp(1.8rem,6vw,2.8rem);line-height:1;border:2px solid var(--gold);border-radius:10px;background:#090509;color:#fff;cursor:poin[...]
       .wat-hole:hover{background:#21102e}
-      @media(max-width:500px){#song-list .song{grid-template-columns:30px minmax(0,1fr) 46px}#song-list .song .play{width:46px;height:46px;min-height:46px}.wat-board{gap:6px;padding:7px;margin-top:6px}}
+      @media(max-width:500px){#song-list .song{grid-template-columns:30px minmax(0,1fr) 46px}#song-list .song .play{width:46px;height:46px;min-height:46px}.wat-board{gap:6px;padding:7px;margin-top:6px}#whack-a-track-game{position:fixed;top:0;left:0;right:0;transform:none;width:100%;max-height:100vh;max-width:none;display:flex;flex-direction:column;border-radius:0;padding:var(--rizney-player-height,0px) 0 0 0}#whack-a-track-game>:not(.wat-board){padding-left:10px;padding-right:10px}#whack-a-track-game .wat-board{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:6px;padding:10px;margin:0 auto;width:100%;max-width:100%;height:100%;max-height:calc(100vh - var(--whack-toolbar-bottom,0px) - 130px)}.wat-hole{min-height:auto}}
     `;
     document.head.appendChild(style);
   }
@@ -387,10 +387,21 @@
     }, 1000);
 
     requestAnimationFrame(() => {
-      game.panel.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      // On mobile, scroll to show the player dock and controls at the top
+      const isMobile = window.innerWidth <= 500;
+      const dock = $(".player-dock");
+      
+      if (isMobile && dock) {
+        dock.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      } else if (!isMobile) {
+        game.panel.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
     });
 
     spawnMole();
