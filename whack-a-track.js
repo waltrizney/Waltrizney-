@@ -2,7 +2,7 @@
   "use strict";
   const $ = (s, r = document) => r.querySelector(s);
   const controls = () => $(".controls");
-  const animals = ["aardvark","alligator","anglefish","ant","anteater","armadillo","baboon","badger","bald-eagle","bass","bat","bear","beaver","bee","blob-fish","blue-heron","boar","buffalo","butterfl[...]
+  const animals = ["aardvark","alligator","anglefish","ant","anteater","armadillo","baboon","badger","bald-eagle","bass","bat","bear","beaver","bee","blob-fish","blue-heron","boar","buffalo","butterfly","camel","capybara","chameleon","cheetah","chihuahua","chimpanzee","chupacabra","clam","cow","coyote","crab","cricket","crocodile","crow","deer","dolphin","donkey","dove","duck","eagle","elephant","falcon","flamingo","fox","frog","gazelle","giraffe","goat","goldfish","gorilla","hamster","hawk","hedgehog","hippo","horse","hyena","jellyfish","kangaroo","kiwi","koala","lion","lizard","llama","lynx","manatee","mole","moose","mouse","narwhal","octopus (2)","otter","owl","panda","panther","parrot","peacock","penguin","pig","platypus","polar-bear","porcupine","puma","rabbit","raccoon","ram","rat","raven","red-panda","rhino","rooster","salmon","scorpion","seagull","seahorse","seal","shark","sloth","snail","snake","spider","squid","squirrel","swan","t-rex","tapir","toucan","unicorn","vulture","walrus","warthog","weasel","whale","wolf","wombat","woodpecker","yak","zebra"];
   const animal = i => animals[i % animals.length];
   const imageFor = i => `assets/animal-icons/${encodeURIComponent(animal(i))}.png`;
   const labelFor = name => name.replace(/\s*\(2\)$/, "").replace(/-/g, " ");
@@ -17,17 +17,17 @@
     }
     if (!$("#rizney-site-adjustments")) {
       const style = document.createElement("style"); style.id = "rizney-site-adjustments"; style.textContent = `
-        .top-area{min-height:116px!important;padding:14px!important;text-align:center}
-        .top-area .donate,.top-area .context-link{position:absolute!important;top:16px!important;z-index:2;display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box;width:96px!important;height:32px!important;padding:0!important;border:1px solid var(--gold);border-radius:999px;color:var(--bright-gold);background:#160c1a;font:inherit;font-size:.68rem;line-height:1;text-align:center;text-decoration:none;white-space:nowrap}
+        .top-area{min-height:88px!important;padding:14px!important;text-align:center}
+        .top-area .donate,.top-area .context-link{top:16px!important;z-index:2;border:1px solid var(--gold);border-radius:999px;padding:5px 9px;color:var(--bright-gold);background:#160c1a;font:inherit;font-size:.68rem;text-decoration:none}
         .top-area .donate{left:10px!important}.top-area .context-link{left:50%!important;transform:translateX(-50%)!important}
-        .top-area .rizney-logo{position:absolute!important;top:2px!important;right:8px!important;width:120px!important;height:120px!important;object-fit:contain;object-position:center}
+        .top-area .rizney-logo{position:absolute;top:6px;right:10px;width:76px;height:76px;object-fit:contain}
         .top-area .donate:hover,.top-area .context-link:hover{background:#55208a}
         .rizney-footer{margin:22px auto 0;padding:20px 0 34px;text-align:center;border-top:1px solid #3b1d50}
         .rizney-footer img{display:block;width:110px;height:auto;max-height:150px;object-fit:contain;margin:0 auto}
-        @media(max-width:500px){.top-area{min-height:100px!important;padding:12px 8px 14px!important}.top-area .donate,.top-area .context-link{top:14px!important;width:84px!important;height:30px!important}.top-area .donate{left:8px!important}.top-area .rizney-logo{top:2px!important;right:4px!important;width:100px!important;height:100px!important}.rizney-footer img{width:94px}}
+        @media(max-width:500px){.top-area{min-height:78px!important;padding:12px 8px 14px!important}.top-area .donate,.top-area .context-link{top:14px!important}.top-area .donate{left:8px!important}.top-area .rizney-logo{width:66px;height:66px;top:4px;right:8px}.rizney-footer img{width:94px;max-height:130px}}
       `; document.head.appendChild(style);
     }
-    if (!$(".rizney-footer")) { const footer = document.createElement("footer"); footer.className = "rizney-footer"; const img = document.createElement("img"); img.src = "assets/curse.png"; img.alt = "Curse"; img.loading = "lazy"; footer.appendChild(img); ($("#main") || document.body).appendChild(footer); }
+    if (!$(".rizney-footer")) { const footer = document.createElement("footer"); footer.className = "rizney-footer"; const img = document.createElement("img"); img.src = "assets/curse.png"; img.alt = "Curse"; img.loading = "lazy"; footer.appendChild(img); ($("main") || document.body).appendChild(footer); }
   }
 
   function addStyles() {
@@ -38,217 +38,37 @@
       #song-list .song{grid-template-columns:38px minmax(0,1fr) 52px}
       #song-list .song .play{grid-column:3;grid-row:1;align-self:stretch;justify-self:end;width:52px;height:52px;min-height:52px;padding:3px;display:grid;place-items:center;overflow:hidden;background:transparent;border:0}
       #song-list .song .play img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
-      #cards .card{background:#000}.card .symbol{height:96px;display:grid;place-items:center;font-size:0}.card .symbol img{width:96px;height:96px;object-fit:contain;display:block}.card .animal-name{display:block;margin:0 0 6px;font-size:.9rem;color:var(--bright-gold)}
-      #whack-a-track-game{position:fixed;top:var(--whack-toolbar-bottom,0px);left:50%;transform:translateX(-50%);z-index:99;display:block;width:min(calc(100vw - 16px),620px);max-height:calc(100vh - var(--whack-toolbar-bottom,0px) - 8px);overflow:auto;padding:8px 10px 10px;border:2px solid var(--gold);border-radius:14px;background:rgba(14,8,17,.96);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+      #cards .card{background:#000}.card .symbol{height:96px;display:grid;place-items:center;font-size:0}.card .symbol img{width:96px;height:96px;object-fit:contain;display:block}.card .animal-name{display:block;margin:0 0 8px;color:var(--bright-gold);font-family:sans-serif;font-size:.78rem;text-transform:capitalize}
+      #whack-a-track-game{position:fixed;top:var(--whack-toolbar-bottom,0px);left:50%;transform:translateX(-50%);z-index:99;display:block;width:min(calc(100vw - 16px),620px);max-height:calc(100vh - var(--whack-toolbar-bottom,0px) - 8px);margin:0;padding:10px 14px 14px;box-sizing:border-box;overflow:hidden;text-align:center;background:#120b18;border:2px solid var(--gold);border-radius:0 0 12px 12px;box-shadow:0 8px 20px rgba(0,0,0,.35)}
       #whack-a-track-game[hidden]{display:none!important}
       #whack-a-track-game h2{margin:0 0 6px;padding:0;border:0;font-size:1rem}
       #wat-status{margin:4px 0;font-size:.85rem}
       .wat-health{height:18px;width:min(100%,460px);margin:0 auto 8px;border:2px solid var(--gold);border-radius:999px;background:#000;overflow:hidden}
       .wat-health-fill{height:100%;width:100%;background:linear-gradient(90deg,#e05252,#f5d76e);transition:width .15s ease}
-      .wat-time{height:18px;width:min(100%,460px);margin:4px auto 8px;border:2px solid var(--gold);border-radius:999px;background:#000;overflow:hidden}
-      .wat-time-fill{height:100%;width:100%;background:linear-gradient(90deg,#7b4de8,#d98cff);transition:width .15s linear}
       .wat-timer{margin:4px 0 8px;color:var(--bright-purple);font-weight:bold}
-      .wat-board{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;width:100%;max-width:500px;margin:8px auto 0;padding:10px;border:2px solid var(--gold);border-radius:12px;background:#090509}
-      .wat-hole{min-height:clamp(58px,14vh,106px);padding:6px;font-size:clamp(1.8rem,6vw,2.8rem);line-height:1;border:2px solid var(--gold);border-radius:10px;background:#090509;color:#fff;cursor:pointer;transition:background .12s ease,transform .12s ease}
+      .wat-board{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;width:100%;max-width:500px;margin:8px auto 0;padding:10px;border:2px solid var(--gold);border-radius:10px;box-sizing:border-box;background:#000}
+      .wat-hole{min-height:clamp(58px,14vh,106px);padding:6px;font-size:clamp(1.8rem,6vw,2.8rem);line-height:1;border:2px solid var(--gold);border-radius:10px;background:#090509;color:#fff;cursor:pointer}
       .wat-hole:hover{background:#21102e}
-      @media(max-width:500px){#song-list .song{grid-template-columns:30px minmax(0,1fr) 46px}#song-list .song .play{width:46px;height:46px;min-height:46px}.wat-board{gap:6px;padding:7px;margin-top:6px}.wat-hole{min-height:58px}}
+      @media(max-width:500px){#song-list .song{grid-template-columns:30px minmax(0,1fr) 46px}#song-list .song .play{width:46px;height:46px;min-height:46px}.wat-board{gap:6px;padding:7px;margin-top:6px}.wat-hole{min-height:clamp(52px,13vh,82px);font-size:clamp(1.6rem,9vw,2.2rem)}}
     `; document.head.appendChild(style);
   }
 
   function syncPlayerHeight() { const dock = $(".player-dock"); if (dock) document.documentElement.style.setProperty("--rizney-player-height", `${dock.getBoundingClientRect().height}px`); }
   function syncGamePosition() { const bar = controls(); if (bar) document.documentElement.style.setProperty("--whack-toolbar-bottom", `${Math.max(0, bar.getBoundingClientRect().bottom)}px`); }
+  function paintSongs() { document.querySelectorAll("#song-list .song").forEach((row, i) => { const button = $("button.play", row); if (!button || button.dataset.animalPainted) return; const img = document.createElement("img"); img.src = imageFor(i); img.alt = labelFor(animal(i)); img.title = labelFor(animal(i)); img.loading = "lazy"; button.replaceChildren(img); button.dataset.animalPainted = "true"; }); }
+  function paintCards() { $("#cards")?.querySelectorAll(".card").forEach((card, i) => { const link = $("a", card); const match = link?.textContent.match(/Play song\s+(\d+)/i); const index = match ? Number(match[1]) - 1 : i; const name = labelFor(animal(index)); const symbol = $(".symbol", card); if (symbol && !$("img", symbol)) { const img = document.createElement("img"); img.src = imageFor(index); img.alt = name; img.title = name; img.loading = "lazy"; symbol.replaceChildren(img); } if (link && !$(".animal-name", card)) { const label = document.createElement("span"); label.className = "animal-name"; label.textContent = name; link.before(label); } }); }
 
-  function paintSongs() {
-    document.querySelectorAll("#song-list .song").forEach((row, i) => {
-      const button = $("button.play", row);
-      if (!button || button.dataset.animalPainted) return;
-      const img = document.createElement("img");
-      img.src = imageFor(i);
-      img.alt = labelFor(animal(i));
-      img.title = labelFor(animal(i));
-      img.loading = "lazy";
-      button.replaceChildren(img);
-      button.dataset.animalPainted = "true";
-    });
-  }
+  let game = null, active = false, health = 6, seconds = 60, moleTimer = null, gameTimer = null;
+  function hideMoles() { game?.board.querySelectorAll(".wat-hole").forEach(h => { h.dataset.active = "false"; h.textContent = "🕳️"; }); }
+  function updateHealth() { if (!game) return; game.healthFill.style.width = `${Math.max(0, health) / 6 * 100}%`; game.healthText.textContent = `Hits remaining: ${health}`; }
+  function updateTimer() { if (game) game.timer.textContent = `Time: ${seconds}s`; }
+  function closeGame() { active = false; clearTimeout(moleTimer); clearInterval(gameTimer); hideMoles(); if (game) game.panel.hidden = true; }
+  function finish(won) { active = false; clearTimeout(moleTimer); clearInterval(gameTimer); hideMoles(); if (!game) return; if (won) { game.status.textContent = "TRACK COMPLETE!"; setTimeout(() => { closeGame(); $("#next-song")?.click(); }, 500); } else { game.status.textContent = "Time ran out."; setTimeout(closeGame, 700); } }
+  function whack(hole) { if (!active || hole.dataset.active !== "true") return; hole.dataset.active = "false"; hole.textContent = "✨"; health = Math.max(0, health - 1); updateHealth(); if (health === 0) finish(true); }
+  function spawnMole() { if (!active || !game) return; hideMoles(); const hole = [...game.board.children][Math.floor(Math.random() * game.board.children.length)]; if (!hole) return; hole.dataset.active = "true"; hole.textContent = "🐾"; clearTimeout(moleTimer); moleTimer = setTimeout(() => { if (!active || hole.dataset.active !== "true") return; hole.dataset.active = "false"; hole.textContent = "🕳️"; }, 1200); }
+  function createGame() { if (game) return game; const panel = document.createElement("section"); panel.id = "whack-a-track-game"; panel.hidden = true; panel.innerHTML = `<div class="wat-health"><div class="wat-health-fill"></div></div><p class="wat-timer"></p><p id="wat-status"></p><div class="wat-board"></div>`; const board = $(".wat-board", panel), status = $("#wat-status", panel); const healthFill = $(".wat-health-fill", panel), healthText = status, timer = $(".wat-timer", panel); for (let i = 0; i < 6; i++) { const hole = document.createElement("button"); hole.type = "button"; hole.className = "wat-hole"; hole.dataset.active = "false"; hole.textContent = "🕳️"; hole.addEventListener("click", () => whack(hole)); board.appendChild(hole); } const parent = controls(); if (parent) parent.insertAdjacentElement("afterend", panel); else ($("main") || document.body).prepend(panel); game = { panel, board, status, healthFill, healthText, timer }; return game; }
+  function toggleGame(event) { event.preventDefault(); event.stopPropagation(); if (active || (game && !game.panel.hidden)) { closeGame(); return; } game = createGame(); syncGamePosition(); game.panel.hidden = false; health = 6; seconds = 60; active = true; updateHealth(); updateTimer(); game.status.textContent = "Whack all the moles!"; clearInterval(gameTimer); gameTimer = setInterval(() => { seconds -= 1; updateTimer(); if (seconds <= 0) finish(false); else spawnMole(); }, 1000); spawnMole(); }
 
-  function paintCards() {
-    $("#cards")?.querySelectorAll(".card").forEach((card, i) => {
-      const link = $("a", card);
-      const match = link?.textContent.match(/Play song\s+(\d+)/i);
-      const index = match ? Number(match[1]) - 1 : i;
-      const name = labelFor(animal(index));
-      const symbol = $(".symbol", card);
-      if (symbol && !$("img", symbol)) {
-        const img = document.createElement("img");
-        img.src = imageFor(index);
-        img.alt = name;
-        img.title = name;
-        img.loading = "lazy";
-        symbol.replaceChildren(img);
-      }
-      if (link && !$(".animal-name", card)) {
-        const label = document.createElement("span");
-        label.className = "animal-name";
-        label.textContent = name;
-        link.before(label);
-      }
-    });
-  }
-
-  let game = null, active = false, health = 6, seconds = 60, whacks = 0, targetWhacks = 20, moleTimer = null, gameTimer = null;
-
-  function hideMoles() {
-    game?.board.querySelectorAll(".wat-hole").forEach(h => {
-      h.dataset.active = "false";
-      h.textContent = "🕳️";
-    });
-  }
-
-  function updateHealth() {
-    if (!game) return;
-    game.healthFill.style.width = `${Math.max(0, health) / 6 * 100}%`;
-    game.healthText.textContent = `Hits remaining: ${health}`;
-  }
-
-  function updateTimer() {
-    if (!game) return;
-    game.timeFill.style.width = `${Math.max(0, seconds) / 60 * 100}%`;
-    game.timer.textContent = `Moles whacked: ${whacks}/${targetWhacks}`;
-  }
-
-  function closeGame() {
-    active = false;
-    clearTimeout(moleTimer);
-    clearInterval(gameTimer);
-    hideMoles();
-    if (game) game.panel.hidden = true;
-  }
-
-  function finish(won) {
-    active = false;
-    clearTimeout(moleTimer);
-    clearInterval(gameTimer);
-    hideMoles();
-    if (!game) return;
-    if (won) {
-      game.status.textContent = "TRACK COMPLETE!";
-      setTimeout(() => {
-        closeGame();
-        document.querySelector("#next-song")?.click();
-      }, 500);
-      return;
-    }
-    game.status.textContent = "Time ran out.";
-    setTimeout(closeGame, 700);
-  }
-
-  function whack(hole) {
-    if (!active || hole.dataset.active !== "true") return;
-    hole.dataset.active = "false";
-    hole.textContent = "✨";
-    whacks = Math.min(targetWhacks, whacks + 1);
-    updateTimer();
-    if (whacks >= targetWhacks) finish(true);
-  }
-
-  function spawnMole() {
-    if (!active || !game) return;
-    hideMoles();
-    const hole = [...game.board.children][Math.floor(Math.random() * game.board.children.length)];
-    if (!hole) return;
-    hole.dataset.active = "true";
-    hole.textContent = "🐾";
-    clearTimeout(moleTimer);
-    moleTimer = setTimeout(() => {
-      if (!active || hole.dataset.active !== "true") return;
-      hole.dataset.active = "false";
-      hole.textContent = "🕳️";
-    }, 1200);
-  }
-
-  function createGame() {
-    if (game) return game;
-    const panel = document.createElement("section");
-    panel.id = "whack-a-track-game";
-    panel.hidden = true;
-    panel.innerHTML = `
-      <div class="wat-health"><div class="wat-health-fill"></div></div>
-      <div class="wat-time"><div class="wat-time-fill"></div></div>
-      <p class="wat-timer"></p>
-      <p id="wat-status"></p>
-      <div class="wat-board"></div>
-    `;
-    const board = $(".wat-board", panel);
-    const status = $("#wat-status", panel);
-    const healthFill = $(".wat-health-fill", panel);
-    const healthText = status;
-    const timer = $(".wat-timer", panel);
-    const timeFill = $(".wat-time-fill", panel);
-    for (let i = 0; i < 6; i++) {
-      const hole = document.createElement("button");
-      hole.type = "button";
-      hole.className = "wat-hole";
-      hole.dataset.active = "false";
-      hole.textContent = "🕳️";
-      hole.addEventListener("click", () => whack(hole));
-      board.appendChild(hole);
-    }
-    const parent = controls();
-    if (parent) parent.insertAdjacentElement("afterend", panel);
-    else ($("#main") || document.body).prepend(panel);
-    game = { panel, board, status, healthFill, healthText, timer, timeFill };
-    return game;
-  }
-
-  function toggleGame(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    if (active || (game && !game.panel.hidden)) {
-      closeGame();
-      return;
-    }
-    game = createGame();
-    syncGamePosition();
-    game.panel.hidden = false;
-    health = 6;
-    seconds = 60;
-    whacks = 0;
-    active = true;
-    updateHealth();
-    updateTimer();
-    game.status.textContent = "Whack 20 moles to whack the track!";
-    clearInterval(gameTimer);
-    gameTimer = setInterval(() => {
-      seconds -= 1;
-      updateTimer();
-      if (seconds <= 0) {
-        finish(false);
-        return;
-      }
-      spawnMole();
-    }, 1000);
-    requestAnimationFrame(() => {
-      game.panel.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-    spawnMole();
-  }
-
-  function init() {
-    addChrome();
-    addStyles();
-    paintSongs();
-    paintCards();
-    syncPlayerHeight();
-    syncGamePosition();
-    window.addEventListener("resize", () => { syncPlayerHeight(); syncGamePosition(); });
-    window.addEventListener("scroll", syncGamePosition, { passive: true });
-    const list = $("#song-list");
-    if (list) new MutationObserver(() => { paintSongs(); paintCards(); }).observe(list, { childList: true, subtree: true });
-    $("#draw-cards")?.addEventListener("click", () => setTimeout(paintCards, 0));
-    $("#whack-track")?.addEventListener("click", toggleGame);
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
-  else init();
+  function init() { addChrome(); addStyles(); paintSongs(); paintCards(); syncPlayerHeight(); syncGamePosition(); window.addEventListener("resize", () => { syncPlayerHeight(); syncGamePosition(); }); window.addEventListener("scroll", syncGamePosition, { passive: true }); const list = $("#song-list"); if (list) new MutationObserver(() => { paintSongs(); paintCards(); }).observe(list, { childList: true, subtree: true }); $("#draw-cards")?.addEventListener("click", () => setTimeout(paintCards, 0)); $("#whack-track")?.addEventListener("click", toggleGame); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true }); else init();
 })();
