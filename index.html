@@ -18,7 +18,7 @@
     #player{width:100%;height:100%;border:0;display:block}
     #now-playing{padding:7px 10px 8px;color:var(--bright-purple);background:#050305;font-size:.85rem;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;padding:10px 8px 12px;background:#000;border-bottom:1px solid #3b1d50}
-    button{border:1px solid var(--gold);border-radius:999px;padding:9px 12px;color:#fff;background:#55208a;font:inherit;font-size:.82rem;cursor:pointer;position:relative;z-index:20;pointer-events:auto}
+    button{border:1px solid var(--gold);border-radius:999px;padding:9px 12px;color:#fff;background:#55208a;font:inherit;font-size:.82rem;cursor:pointer;position:relative;z-index:20;pointer-events:auto[...]
     button:hover{background:#7e35bc}
     button:disabled{opacity:.45;cursor:not-allowed}
     .skip{min-width:42px;width:42px;height:38px;padding:0;font-size:1.2rem}
@@ -56,10 +56,10 @@
   </style>
 </head>
 <body>
-  <section class="top-area"><a class="donate" href="https://venmo.com/u/YOUR_VENMO_USERNAME" target="_blank" rel="noopener">♥ Donate</a><h1>✦ WALT RIZNEY ✦</h1><div class="tagline">Mix'N'Mojo</div></section>
+  <section class="top-area"><a class="donate" href="https://venmo.com/u/YOUR_VENMO_USERNAME" target="_blank" rel="noopener">♥ Donate</a><h1>✦ WALT RIZNEY ✦</h1><div class="tagline">Mix'N'Mojo</d[...]
   <section class="player-dock"><div class="player-wrap"><div id="player"></div></div><div id="now-playing">Now playing: MEGA MIX'N'MOJO Intro</div></section>
-  <nav class="controls" aria-label="Music controls"><button id="previous-song" class="skip" type="button" aria-label="Previous song">«</button><button id="random-song" type="button">Random</button><button id="whack-track" type="button">Whack-A-Track</button><button id="draw-cards" type="button" aria-expanded="false">Cards</button><button id="next-song" class="skip" type="button" aria-label="Next song">»</button></nav>
-  <main><p class="intro">Browse the collection in order, or let the cards choose a song for you.</p><section id="reading" hidden><h2>Your Music Reading</h2><div id="cards"></div></section><section><h2>Chronological</h2><div id="song-list"></div></section></main>
+  <nav class="controls" aria-label="Music controls"><button id="previous-song" class="skip" type="button" aria-label="Previous song">«</button><button id="random-song" type="button">Random</button><b[...]
+  <main><p class="intro">Browse the collection in order, or let the cards choose a song for you.</p><section id="reading" hidden><h2>Your Music Reading</h2><div id="cards"></div></section><section><h2>[...]
 
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
@@ -369,7 +369,7 @@
     ids.forEach((id, index) => {
       const row = document.createElement('article');
       row.className = 'song';
-      row.innerHTML = `<span class="song-number">${index + 1}</span><span class="song-title">♫ ${titleFor(index)}<small>YouTube video ${index + 1}</small></span><button class="play" type="button">Play</button>`;
+      row.innerHTML = `<span class="song-number">${index + 1}</span><span class="song-title">♫ ${titleFor(index)}<small>YouTube video ${index + 1}</small></span><button class="play" type="button">Pl[...]
       row.querySelector('.play').addEventListener('click', () => {
         cardPlaylist = null;
         cardPosition = 0;
@@ -440,6 +440,7 @@
     updateButtons();
   </script>
 
+  <script src="./main.js"></script>
   <script src="./whack-a-track.js"></script>
 </body>
 </html>
