@@ -3,79 +3,15 @@
   const $ = (s, r = document) => r.querySelector(s);
   const controls = () => $(".controls");
 
-  const animals = ["aardvark","alligator","anglefish","ant","anteater","armadillo","baboon","badger","bald-eagle","bass","bat","bear","beaver","bee","blob-fish","blue-heron","boar","buffalo","butterfly","camel","capybara","chameleon","cheetah","chihuahua","chimpanzee","chupacabra","clam","cow","coyote","crab","cricket","crocodile","crow","deer","dolphin","donkey","dove","duck","eagle","elephant","falcon","flamingo","fox","frog","gazelle","giraffe","goat","goldfish","gorilla","hamster","hawk","hedgehog","hippo","horse","hyena","jellyfish","kangaroo","kiwi","koala","lion","lizard","llama","lynx","manatee","mole","moose","mouse","narwhal","octopus (2)","otter","owl","panda","panther","parrot","peacock","penguin","pig","platypus","polar-bear","porcupine","puma","rabbit","raccoon","ram","rat","raven","red-panda","rhino","rooster","salmon","scorpion","seagull","seahorse","seal","shark","sloth","snail","snake","spider","squid","squirrel","swan","t-rex","tapir","toucan","unicorn","vulture","walrus","warthog","weasel","whale","wolf","wombat","woodpecker","yak","zebra"];
-
-  const animal = i => animals[i % animals.length];
-  const imageFor = i => `assets/animal-icons/${encodeURIComponent(animal(i))}.png`;
-  const labelFor = name => name.replace(/\s*\(2\)$/, "").replace(/-/g, " ");
-
-  function addChrome() {
-    const top = $(".top-area");
-
-    if (top) {
-      top.querySelector("h1")?.remove();
-      top.querySelector(".tagline")?.remove();
-
-      if (!$(".rizney-logo", top)) {
-        const img = document.createElement("img");
-        img.className = "rizney-logo";
-        img.src = "assets/rizney.png";
-        img.alt = "Rizney";
-        top.appendChild(img);
-      }
-
-      if (!$(".context-link", top)) {
-        const link = document.createElement("a");
-        link.className = "context-link";
-        link.href = "./context.html";
-        link.textContent = "CONTEXT";
-        top.appendChild(link);
-      }
-    }
-
-    if (!$("#rizney-site-adjustments")) {
-      const style = document.createElement("style");
-      style.id = "rizney-site-adjustments";
-      style.textContent = `
-        .top-area{min-height:88px!important;padding:14px!important;text-align:center}
-        .top-area .donate,.top-area .context-link{top:16px!important;z-index:2;border:1px solid var(--gold);border-radius:999px;padding:5px 9px;color:var(--bright-gold);background:#160c1a;font:inherit;cursor:pointer;text-decoration:none}
-        .top-area .donate{left:10px!important}.top-area .context-link{left:50%!important;transform:translateX(-50%)!important}
-        .top-area .rizney-logo{position:absolute;top:10px;right:14px;width:112px;height:112px;object-fit:contain}
-        .top-area .donate:hover,.top-area .context-link:hover{background:#55208a}
-        .rizney-footer{margin:22px auto 0;padding:5px 0 34px;text-align:center;border-top:1px solid #3b1d50}
-        .rizney-footer img{display:block;width:200px;height:auto;max-height:250px;object-fit:contain;margin:0 auto}
-        @media(max-width:500px){.top-area{min-height:78px!important;padding:12px 8px 14px!important}.top-area .donate,.top-area .context-link{top:14px!important}.top-area .donate{left:8px!important}.top-area .rizney-logo{width:80px;height:80px;top:6px;right:8px}}
-      `;
-      document.head.appendChild(style);
-    }
-
-    if (!$(".rizney-footer")) {
-      const footer = document.createElement("footer");
-      footer.className = "rizney-footer";
-
-      const img = document.createElement("img");
-      img.src = "assets/curse.png";
-      img.alt = "Curse";
-      img.loading = "lazy";
-
-      footer.appendChild(img);
-      ($("#main") || document.body).appendChild(footer);
-    }
-  }
+  let game = null, active = false, health = 6, seconds = 60, whacks = 0, targetWhacks = 20, moleTimer = null, gameTimer = null;
 
   function addStyles() {
-    if ($("#rizney-animal-styles")) return;
+    if ($("#whack-a-track-styles")) return;
 
     const style = document.createElement("style");
-    style.id = "rizney-animal-styles";
+    style.id = "whack-a-track-styles";
     style.textContent = `
-      .player-dock{z-index:101}.controls{position:sticky;top:var(--rizney-player-height,0px);z-index:100}
-      #reading[hidden]{display:none!important}
-      #song-list .song{grid-template-columns:38px minmax(0,1fr) 52px}
-      #song-list .song .play{grid-column:3;grid-row:1;align-self:stretch;justify-self:end;width:52px;height:52px;min-height:52px;padding:3px;display:grid;place-items:center;overflow:hidden;background:#0a0510;border:1px solid var(--gold);border-radius:6px;cursor:pointer}
-      #song-list .song .play img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
-      #cards .card{background:#000}.card .symbol{height:96px;display:grid;place-items:center;font-size:0}.card .symbol img{width:96px;height:96px;object-fit:contain;display:block}.card .animal-name{display:block;margin-top:8px;font-size:.9rem;font-weight:600;letter-spacing:.5px}
-      #whack-a-track-game{position:fixed;top:var(--whack-toolbar-bottom,0px);left:50%;transform:translateX(-50%);z-index:99;display:block;width:min(calc(100vw - 16px),620px);max-height:calc(100vh - var(--whack-toolbar-bottom,0px) - 16px);background:#160c1a;border:2px solid var(--gold);border-radius:10px;padding:12px 16px;overflow-y:auto;box-shadow:0 4px 20px rgba(0,0,0,.8)}
+      #whack-a-track-game{position:fixed;top:var(--whack-toolbar-bottom,0px);left:50%;transform:translateX(-50%);z-index:99;display:block;width:min(calc(100vw - 16px),620px);max-height:calc(100vh - var(--whack-toolbar-bottom,0px) - 16px);overflow-y:auto;padding:16px;background:#160c1a;border:2px solid var(--gold);border-radius:12px}
       #whack-a-track-game[hidden]{display:none!important}
       #whack-a-track-game h2{margin:0 0 6px;padding:0;border:0;font-size:1rem}
       #wat-status{margin:4px 0;font-size:.85rem}
@@ -83,23 +19,12 @@
       .wat-health-fill{height:100%;width:100%;background:linear-gradient(90deg,#e05252,#f5d76e);transition:width .15s ease}
       .wat-time-fill{height:100%;width:100%;background:linear-gradient(90deg,#7b4de8,#d98cff);transition:width .15s linear}
       .wat-timer{margin:4px 0 8px;color:var(--bright-purple);font-weight:bold}
-      .wat-board{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;width:100%;max-width:500px;margin:8px auto 0;padding:10px;border:2px solid var(--gold);border-radius:8px;background:#0a0510}
+      .wat-board{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:10px;width:100%;max-width:500px;margin:8px auto 0;padding:10px;border:2px solid var(--gold);border-radius:10px;background:#090509}
       .wat-hole{min-height:clamp(58px,14vh,106px);padding:6px;font-size:clamp(1.8rem,6vw,2.8rem);line-height:1;border:2px solid var(--gold);border-radius:10px;background:#090509;color:#fff;cursor:pointer;transition:background .1s ease}
       .wat-hole:hover{background:#21102e}
-      @media(max-width:500px){#song-list .song{grid-template-columns:30px minmax(0,1fr) 46px}#song-list .song .play{width:46px;height:46px;min-height:46px}.wat-board{gap:6px;padding:7px;margin-top:6px}}
+      @media(max-width:500px){.wat-board{gap:6px;padding:7px;margin-top:6px}}
     `;
     document.head.appendChild(style);
-  }
-
-  function syncPlayerHeight() {
-    const dock = $(".player-dock");
-
-    if (dock) {
-      document.documentElement.style.setProperty(
-        "--rizney-player-height",
-        `${dock.getBoundingClientRect().height}px`
-      );
-    }
   }
 
   function syncGamePosition() {
@@ -112,51 +37,6 @@
       );
     }
   }
-
-  function paintSongs() {
-    document.querySelectorAll("#song-list .song").forEach((row, i) => {
-      const button = $("button.play", row);
-
-      if (!button || button.dataset.animalPainted) return;
-
-      const img = document.createElement("img");
-      img.src = imageFor(i);
-      img.alt = labelFor(animal(i));
-      img.title = labelFor(animal(i));
-      img.loading = "lazy";
-
-      button.replaceChildren(img);
-      button.dataset.animalPainted = "true";
-    });
-  }
-
-  function paintCards() {
-    $("#cards")?.querySelectorAll(".card").forEach((card, i) => {
-      const link = $("a", card);
-      const match = link?.textContent.match(/Play song\s+(\d+)/i);
-      const index = match ? Number(match[1]) - 1 : i;
-      const name = labelFor(animal(index));
-      const symbol = $(".symbol", card);
-
-      if (symbol && !$("img", symbol)) {
-        const img = document.createElement("img");
-        img.src = imageFor(index);
-        img.alt = name;
-        img.title = name;
-        img.loading = "lazy";
-        symbol.replaceChildren(img);
-      }
-
-      if (link && !$(".animal-name", card)) {
-        const label = document.createElement("span");
-        label.className = "animal-name";
-        label.textContent = name;
-        link.before(label);
-      }
-    });
-  }
-
-  let game = null, active = false, health = 6, seconds = 60, whacks = 0, targetWhacks = 20, moleTimer = null, gameTimer = null;
 
   function hideMoles() {
     game?.board.querySelectorAll(".wat-hole").forEach(h => {
@@ -327,8 +207,7 @@
         panel
       );
     } else {
-      $("#main") || document.body
-        .prepend(panel);
+      ($("#main") || document.body).prepend(panel);
     }
 
     game = {
@@ -406,41 +285,15 @@
   }
 
   function init() {
-    addChrome();
     addStyles();
-
-    paintSongs();
-    paintCards();
-
-    syncPlayerHeight();
     syncGamePosition();
 
-    window.addEventListener("resize", () => {
-      syncPlayerHeight();
-      syncGamePosition();
-    });
+    window.addEventListener("resize", syncGamePosition);
 
     window.addEventListener(
       "scroll",
       syncGamePosition,
       { passive: true }
-    );
-
-    const list = $("#song-list");
-
-    if (list) {
-      new MutationObserver(() => {
-        paintSongs();
-        paintCards();
-      }).observe(list, {
-        childList: true,
-        subtree: true
-      });
-    }
-
-    $("#draw-cards")?.addEventListener(
-      "click",
-      () => setTimeout(paintCards, 0)
     );
 
     $("#whack-track")?.addEventListener(
